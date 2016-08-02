@@ -5,33 +5,6 @@ import os
 
 pygame.mixer.init()
 
-player = Player()
-info = Info()
-baddies = pygame.sprite.Group()
-towers = pygame.sprite.Group()
-
-baddieList = list()
-towerList = list()
-enemyCount = 0
-
-screen = pygame.display.set_mode((825,625))
-pygame.display.set_caption("Isim Tower Defense")
-
-background = pygame.Surface(screen.get_size())
-background = background.convert()
-background.fill ((0,0,0))
-screen.blit(background, (0,0))
-
-twrSurf = pygame.Surface((625,625))
-twrSurf.set_alpha(255*0.4)
-twrSurf.fill((255,0,255))
-twrSurf.set_colorkey((255,0,255))
-
-drkSurf = pygame.Surface((625,625))
-drkSurf.set_alpha(255*0.6)
-drkSurf.fill((20,20,20))
-
-
 class Player():
     def __init__(self):
         self.health = 25
@@ -129,9 +102,42 @@ class Info():
             self.up_text = to_font.render("", 1, (255, 255, 255))
         self.draw = 1
 
+    def drawInfo(self):
+        if self.draw == 1:
+            screen.blit(self.t_type, (self.p_x, self.p_y))
+            screen.blit(self.t_level, (self.p_x, self.p_y + 25))
+            screen.blit(self.t_power, (self.p_x, self.p_y + 50))
+            screen.blit(self.t_range, (self.p_x, self.p_y + 75))
+            screen.blit(self.t_speed, (self.p_x, self.p_y + 100))
+            screen.blit(self.t_up_cost, (self.p_x, self.p_y + 125))
+            screen.blit(self.up_text, (self.p_x, self.p_y + 150))
 
 
+player = Player()
+info = Info()
+baddies = pygame.sprite.Group()
+towers = pygame.sprite.Group()
 
+baddieList = list()
+towerList = list()
+enemyCount = 0
+
+screen = pygame.display.set_mode((825,625))
+pygame.display.set_caption("Isim Tower Defense")
+
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill ((0,0,0))
+screen.blit(background, (0,0))
+
+twrSurf = pygame.Surface((625,625))
+twrSurf.set_alpha(255*0.4)
+twrSurf.fill((255,0,255))
+twrSurf.set_colorkey((255,0,255))
+
+drkSurf = pygame.Surface((625,625))
+drkSurf.set_alpha(255*0.6)
+drkSurf.fill((20,20,20))
 
 
 

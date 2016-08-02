@@ -15,7 +15,7 @@ class Map:
         # TODO : verifier l utilisation d une tile grise pr dessiner le path plutot qu une image de background
         tiles = pygame.image.load(os.path.join('Images', 'tiles.png'))
         self.ig_map_area = pygame.image.load(os.path.join('Images', map + 'map.png'))
-        self.ig_menu = pygame.image.load(os.path.join('Images', 'ig_menu.png'))
+        self.ig_menu = pygame.image.load(os.path.join('Images', 'menu.png'))
         self.TILESIZE = 25
 
         self.display = pygame.display.get_surface()
@@ -33,7 +33,7 @@ class Map:
 
     def mapMaking(self):
         file = open(self.mapFile, 'r')
-        self.lineList = file.readlines()
+        self.linesList = file.readlines()
         self.charList = self.linesList
 
         for i in range(len(self.linesList)):
@@ -87,3 +87,84 @@ class Map:
     def turnPoints(self):
         self.turnPoints = [self._0, self._1, self._2, self._3, self._4, self._5, self._6, self._7, self._8, self._9]
         return self.turnPoints
+
+
+
+
+
+
+class GridControl:
+    def __init__(self, map, screen, grid):
+        self.charList = grid
+        self.TILESIZE = 25
+        self.surf = pygame.Surface((self.TILESIZE,self.TILESIZE))
+        self.m_x = -100
+        self.m_y = -100
+        self.C_red = (255,0,0)
+        self.C_green = (0,255,0)
+        self.C_yellow = (255,255,0)
+        self.C_empty = (0,0,0)
+        self.chosenColor = self.C_empty
+        self.surf.set_alpha(255*0.4)
+        self.surf.fill(self.chosenColor)
+        self.doubleClik = 2
+        self.clickLocX = -1000
+        self.clickLocY = -1000
+
+    def click(self):
+        self.doubleClik = 2
+        mux, muy = pygame.mouse.get_pos()
+        self.clickLocX = mux/self.TILESIZE
+        self.clickLocY = muy/self.TILESIZE
+        self.m_x = self.clickLocX*self.TILESIZE
+        self.m_y = self.clickLocY*self.TILESIZE
+
+        if (self.m_x < 625) and (self.m_y < 625):
+            tile = self.checkTile(self.charList[self.clickLocY][self.clickLocX])
+            self.chosenColor = tile
+
+        self.surf.fill(self.chosenColor)
+
+    def unclick(self):
+        self.doubleClik -= 1
+        if self.doubleClik == 0:
+            self.m_x = -100
+            self.m_y = -100
+            self.chosenColor = self.C_empty
+
+    def checkTile(self, char):
+
+        if char == 'G':
+            return self.C_green
+        elif char =='T':
+            return self.C_yellow
+        else:
+            return self.C_red
+
+    def setTower(self):
+        if (self.chosenColor == self.C_green):
+            changeChar = list(self.charList[self.clickLocY])
+            changeChar[self.clickLocX] = 'T'
+            changeChar = "".join(changeChar)
+            self.charList[self.clickLocY] = changeChar
+            self.chosenColor = self.C_yellow
+            self.surf.fill(self.chosenColor)
+            return (self.m_x, self.m_y)
+
+    def removeTower(self):
+        if (self.chosenColor == self.C_yellow):
+            changeChar = list(self.charList[self.clickLocY])
+            changeChar[self.clickLocX] = 'G'
+            changeChar = "".join(changeChar)
+            self.drawSelection()
+            self.charList[self.clickLocY] = changeChar
+            self.chosenColor = self.C_green
+            self.surf.fill(self.chosenColor)
+
+    def checkTower(self):
+        if self.chosenColor != self.C_empty:
+            tile = self.checkTile(self.charList[self.clickLocY][self.clickLocX])
+            if tile == self.C_green:
+                return 'No'
+            else:
+                return 'Yes'
