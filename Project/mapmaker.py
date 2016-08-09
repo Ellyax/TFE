@@ -6,16 +6,14 @@ from Builder import *
 
 class Map:
     def __init__(self, map, background):
-        # TODO : verifier l utilisation d un fichier txt pr la map ou l utilisation d une image background
         self.mapFile = os.path.join('Images', map + 'map.txt')
         self.linesList = None
-        self.wayPoint = None
+        self.turnPoints = None
         self.charList = None
 
-        # TODO : verifier l utilisation d une tile grise pr dessiner le path plutot qu une image de background
-        tiles = pygame.image.load(os.path.join('Images', 'tiles.png'))
         self.ig_map_area = pygame.image.load(os.path.join('Images', map + 'map.png'))
-        self.ig_menu = pygame.image.load(os.path.join('Images', 'menu.png'))
+        tiles = pygame.image.load(os.path.join('Images', 'tiles.png'))
+        self.ig_menu = pygame.image.load(os.path.join('Images', 'sidebar.png'))
         self.TILESIZE = 25
 
         self.display = pygame.display.get_surface()
@@ -47,16 +45,26 @@ class Map:
 
         ig_map_area_rect = self.ig_map_area.get_rect()
         ig_map_area_rect.topleft=(0, 0)
+        self.display.blit(self.ig_map_area, ig_map_area_rect)
 
         ig_menu_rect = self.ig_menu.get_rect()
         ig_menu_rect.topleft = (625, 0)
         self.display.blit(self.ig_menu, ig_menu_rect)
 
     def loadTile(self, char, i, j):
+        tile = self.tilesList[0]
+
         if char == 'X':
             tile = self.tilesList[0]
         elif char == 'O':
             tile = self.tilesList[1]
+        elif char == 'S':
+            tile = self.tilesList[1]
+            self._S = (self.TILESIZE * j + 12, self.TILESIZE * i +12)
+        elif char == 'E':
+            tile = self.tilesList[1]
+            self._E = (self.TILESIZE * j + 12, self.TILESIZE * i + 12)
+
 
         if char == '0':
             self._0 = (self.TILESIZE * j + 12, self.TILESIZE * i + 12)
@@ -84,8 +92,8 @@ class Map:
     def getCharList(self):
         return self.charList
 
-    def turnPoints(self):
-        self.turnPoints = [self._0, self._1, self._2, self._3, self._4, self._5, self._6, self._7, self._8, self._9]
+    def checkTurnPoints(self):
+        self.turnPoints = [self._S, self._E, self._0, self._1, self._2, self._3, self._4, self._5, self._6, self._7, self._8, self._9]
         return self.turnPoints
 
 
@@ -134,7 +142,7 @@ class GridControl:
 
     def checkTile(self, char):
 
-        if char == 'G':
+        if char == 'X':
             return self.C_green
         elif char =='T':
             return self.C_yellow
@@ -154,7 +162,7 @@ class GridControl:
     def removeTower(self):
         if (self.chosenColor == self.C_yellow):
             changeChar = list(self.charList[self.clickLocY])
-            changeChar[self.clickLocX] = 'G'
+            changeChar[self.clickLocX] = 'X'
             changeChar = "".join(changeChar)
             self.drawSelection()
             self.charList[self.clickLocY] = changeChar

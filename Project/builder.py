@@ -20,9 +20,9 @@ class MapChoice(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.img_loader()
-        self.img = self.imgList[type]
+        self.image = self.imgList[type]
         self.type = type
-        self.rect = self.img.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.selected = 0
@@ -30,10 +30,10 @@ class MapChoice(pygame.sprite.Sprite):
     def img_loader(self):
         img_button = pygame.image.load(os.path.join ('Images', 'menu.png'))
         self.imgList = []
-        imgSize = (215, 55)
-        offset = ((0,0), (0,55), (0,110), (0,165))
+        imgSize = (140, 40)
+        offset = ((0,0), (0,40), (0,79), (0,119), (0,158))
 
-        for i in range(4):
+        for i in range(5):
             temp_img = pygame.Surface(imgSize)
             temp_img.blit(img_button, (0,0), (offset[i], imgSize))
             self.imgList.append(temp_img)
@@ -44,7 +44,7 @@ def dist(first, second, tower_range):
 
     if range == 0:
         return 1
-    elif (math.sqrt((second.center_x-aim_x)**2 + (second.center_y-aim_y)**2)) <= tower_range :
+    elif (math.sqrt((second.centerx-aim_x)**2 + (second.centery-aim_y)**2)) <= tower_range :
         return 1
 
 def drawText():
@@ -115,15 +115,15 @@ class Info():
 
 player = Player()
 info = Info()
-baddies = pygame.sprite.Group()
+enemy = pygame.sprite.Group()
 towers = pygame.sprite.Group()
 
-baddieList = list()
+enemyList = list()
 towerList = list()
 enemyCount = 0
 
 screen = pygame.display.set_mode((825,625))
-pygame.display.set_caption("Isim Tower Defense")
+pygame.display.set_caption("HeH Tower Defense")
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
