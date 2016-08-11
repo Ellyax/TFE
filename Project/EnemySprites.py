@@ -36,7 +36,7 @@ class EasyEnemy(pygame.sprite.Sprite):
 
         if mode == 'hard':
             self.health *= 2
-            self.reward *= 1.5
+            self.goldkill *= 1.5
 
         self.start_health = self.health
         self.distance = 0
