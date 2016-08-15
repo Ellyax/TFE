@@ -15,7 +15,7 @@ class Tower(pygame.sprite.Sprite):
         self.type = type
 
         if self.type == 1:
-            self.tile = self.tilesList[0]
+            self.image = self.tilesList[0]
             self.BASED_DMG = 5
             self.dmg = self.BASED_DMG
             self.cost = 50
@@ -25,7 +25,7 @@ class Tower(pygame.sprite.Sprite):
             self.upgrade_cost = 100
 
         elif self.type == 2:
-            self.tile = self.tilesList[1]
+            self.image = self.tilesList[1]
             self.BASED_DMG = 15
             self.dmg = self.BASED_DMG
             self.cost = 60
@@ -35,7 +35,7 @@ class Tower(pygame.sprite.Sprite):
             self.upgrade_cost = 120
 
         elif self.type == 3:
-            self.tile = self.tilesList[2]
+            self.image = self.tilesList[2]
             self.BASED_DMG = 5
             self.dmg = self.BASED_DMG
             self.cost = 75
@@ -45,7 +45,7 @@ class Tower(pygame.sprite.Sprite):
             self.upgrade_cost = 150
 
         elif self.type == 4:
-            self.tile = self.tilesList[3]
+            self.image = self.tilesList[3]
             self.BASED_DMG = 70
             self.dmg = self.BASED_DMG
             self.cost = 100
@@ -54,7 +54,7 @@ class Tower(pygame.sprite.Sprite):
             self.reloadNum = 0
             self.upgrade_cost = 200
 
-        self.rect = self.tile.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.surf_x = self.rect.center
@@ -153,34 +153,34 @@ class TowerSprite(pygame.sprite.Sprite):
         self.type = type
 
         if self.type == 1:
-            self.tile = self.tileList[0]
+            self.image = self.tileList[0]
             self.BASED_DMG = 5
             self.cost = 50
             self.range = 100
             self.speed = 'average'
 
         if self.type == 2:
-            self.tile = self.tileList[0]
+            self.image = self.tileList[0]
             self.BASED_DMG = 15
             self.cost = 60
             self.range = 100
             self.speed = 'average'
 
         if self.type == 3:
-            self.tile = self.tileList[0]
+            self.image = self.tileList[0]
             self.BASED_DMG = 5
             self.cost = 75
             self.range = 300
             self.speed = 'fast'
 
         if self.type == 4:
-            self.tile = self.tileList[0]
+            self.image = self.tileList[0]
             self.BASED_DMG = 70
             self.cost = 100
             self.range = 100
             self.speed = 'slow'
 
-        self.rect = self.tile.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.centerx = x
         self.rect.y = y
         self.dataFont = pygame.font.SysFont("None", 20)

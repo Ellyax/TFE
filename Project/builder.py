@@ -112,6 +112,9 @@ class Info():
             screen.blit(self.t_up_cost, (self.p_x, self.p_y + 125))
             screen.blit(self.up_text, (self.p_x, self.p_y + 150))
 
+    def unclick(self):
+        self.draw = 0
+
 
 player = Player()
 info = Info()
@@ -120,7 +123,7 @@ towers = pygame.sprite.Group()
 
 enemyList = list()
 towerList = list()
-enemyCount = 0
+enemy_count = 0
 
 screen = pygame.display.set_mode((825,625))
 pygame.display.set_caption("HeH Tower Defense")
