@@ -17,7 +17,7 @@ class EasyEnemy(pygame.sprite.Sprite):
 
         self.wait = 3
         self.node = 1
-        self._S, self._E,self._0, self._1, self._2, self._3, self._4, self._5, self._6, self._7, self._8, self._9 = turnPoints
+        self._S, self._E, self._0, self._1, self._2, self._3, self._4, self._5, self._6, self._7, self._8, self._9 = turnPoints
 
         self.loadImages()
         self.frame = 0
@@ -27,10 +27,8 @@ class EasyEnemy(pygame.sprite.Sprite):
         self.image = self.imgList[0]
         self.rect = self.image.get_rect()
 
-        self.rect.centerx = self._S
-        self.rect.centery = self._S
-        self.node_x = self._0
-        self.node_y = self._0
+        self.rect.centerx, self.rect.centery = self._S
+        self.node_x, self.node_y = self._0
         self.result = {0: self._S, 1: self._0, 2: self._1, 3: self._2, 4: self._3, 5: self._4, 6: self._5, 7: self._6, 8: self._7, 9: self._8,10: self._9, 11: self._E}
         self.d = 0
 
@@ -52,6 +50,9 @@ class EasyEnemy(pygame.sprite.Sprite):
         self.move()
 
     def move(self):
+        print "node_x", type(self.node_x)
+        print self.node_x
+        print self._0
         if ((self.node_x - self.speed) < (self.rect.centerx) and self.d == 1):
             self.rect.centerx = self.node_x
         if ((self.node_y - self.speed) < (self.rect.centery) and self.d == 2):
@@ -77,8 +78,7 @@ class EasyEnemy(pygame.sprite.Sprite):
         if (self.rect.centerx == self.node_x) and (self.rect.centery == self.node_y) :
             if self.node < 11:
                 self.node += 1
-                self.node_x = self.result[self.node]
-                self.node_y = self.result[self.node]
+                self.node_x, self.node_y = self.result[self.node]
             else:
                 self.wait -= 1
                 if self.wait <= 0:

@@ -76,6 +76,7 @@ class Tower(pygame.sprite.Sprite):
             temp_tile.blit(img, (0,0), (offset[i], tileSize))
             self.tilesList.append(temp_tile)
 
+
     def target(self):
         for enemy in enemyList:
             aim_x = enemy.rect.centerx
@@ -148,33 +149,33 @@ class TowerSprite(pygame.sprite.Sprite):
     def __init__(self, x, y, type):
         pygame.sprite.Sprite.__init__(self)
 
-        self.tileList = None
+        self.tilesList = None
         self.loadTiles()
         self.type = type
 
         if self.type == 1:
-            self.image = self.tileList[0]
+            self.image = self.tilesList[0]
             self.BASED_DMG = 5
             self.cost = 50
             self.range = 100
             self.speed = 'average'
 
         if self.type == 2:
-            self.image = self.tileList[0]
+            self.image = self.tilesList[1]
             self.BASED_DMG = 15
             self.cost = 60
             self.range = 100
             self.speed = 'average'
 
         if self.type == 3:
-            self.image = self.tileList[0]
+            self.image = self.tilesList[2]
             self.BASED_DMG = 5
             self.cost = 75
             self.range = 300
             self.speed = 'fast'
 
         if self.type == 4:
-            self.image = self.tileList[0]
+            self.image = self.tilesList[3]
             self.BASED_DMG = 70
             self.cost = 100
             self.range = 100
@@ -187,27 +188,27 @@ class TowerSprite(pygame.sprite.Sprite):
 
     def loadTiles(self):
         img = pygame.image.load(os.path.join('Images', 'tower.png'))
-        self.tileList = []
+        self.tilesList = []
         tileSize = (25, 25)
         offset = ((0,0), (0,25), (25,0), (25,25))
 
         for i in range(4):
             temp_tile = pygame.Surface(tileSize)
             temp_tile.blit(img, (0, 0), (offset[i], tileSize))
-            self.tileList.append(temp_tile)
+            self.tilesList.append(temp_tile)
 
     def update(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             self.txtDraw()
 
     def txtDraw(self):
-        t_damage = self.dataFont.render("Base dmg : %d"% self.BASED_DMG, 1, (255, 255, 255))
-        t_range = self.dataFont.render("Range : %d"% self.range, 1, (255, 255, 255))
-        t_cost = self.dataFont.render("Cost : %d"% self.cost, 1, (255, 255, 255))
-        t_speed = self.dataFont.render("Speed: " + self.speed, 1, (255, 255, 255))
+        t_damage = self.dataFont.render("Degats de base : %d"% self.BASED_DMG, 1, (255, 255, 255))
+        t_range = self.dataFont.render("Portee : %d"% self.range, 1, (255, 255, 255))
+        t_cost = self.dataFont.render("Cout : %d"% self.cost, 1, (255, 255, 255))
+        t_speed = self.dataFont.render("Vitesse : " + self.speed, 1, (255, 255, 255))
 
         pos_x = 665
-        pos_y = 230
+        pos_y = 200
 
         screen.blit(t_damage, (pos_x, pos_y))
         screen.blit(t_range, (pos_x, pos_y+25))
