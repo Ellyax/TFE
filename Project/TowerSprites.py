@@ -7,8 +7,7 @@ class Tower(pygame.sprite.Sprite):
     def __init__(self, xy, type):
         pygame.sprite.Sprite.__init__(self)
         towerList.append(self)
-        x = xy
-        y = xy
+        x, y = xy
         self.lvl = 1
         self.tilesList = None
         self.loadTiles()
@@ -57,8 +56,7 @@ class Tower(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.surf_x = self.rect.center
-        self.surf_y = self.rect.center
+        self.surf_x, self.surf_y = self.rect.center
         self.surf_x -= 100
         self.surf_y -= 100
 

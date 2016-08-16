@@ -34,40 +34,45 @@ class Map:
         self.linesList = file.readlines()
         self.charList = self.linesList
 
+        ig_map_area_rect = self.ig_map_area.get_rect()
+        ig_map_area_rect.topleft = (0, 0)
+        self.display.blit(self.ig_map_area, ig_map_area_rect)
+
+
         for i in range(len(self.linesList)):
             self.linesList[i] = self.linesList[i].strip()
             for j in range(len(self.linesList[i])):
-                tile = self.loadTile(self.linesList[i][j], i, j)
-                tileRect = tile.get_rect()
-                tileRect.left = self.TILESIZE * j
-                tileRect.top = self.TILESIZE * i
-                self.display.blit(tile, tileRect)
+                if self.linesList[i][j] != 'X':
+                    tile = self.loadTile(self.linesList[i][j], i, j)
+                    tileRect = tile.get_rect()
+                    tileRect.left = self.TILESIZE * j
+                    tileRect.top = self.TILESIZE * i
+                    self.display.blit(tile, tileRect)
 
-        ig_map_area_rect = self.ig_map_area.get_rect()
-        ig_map_area_rect.topleft=(0, 0)
-        self.display.blit(self.ig_map_area, ig_map_area_rect)
 
         ig_menu_rect = self.ig_menu.get_rect()
         ig_menu_rect.topleft = (625, 0)
         self.display.blit(self.ig_menu, ig_menu_rect)
 
-    def loadTile(self, char, i, j):
-        tile = self.tilesList[0]
 
-        if char == 'X':
-            tile = self.tilesList[0]
-        elif char == 'O':
-            tile = self.tilesList[1]
+
+    def loadTile(self, char, i, j):
+        image = self.tilesList[1]
+
+        #if char == 'X':
+        #    image = self.tilesList[0]
+        if char == 'O':
+            image = self.tilesList[1]
         elif char == 'S':
-            tile = self.tilesList[1]
+            image = self.tilesList[1]
             self._S = (self.TILESIZE * j + 12, self.TILESIZE * i +12)
         elif char == 'E':
-            tile = self.tilesList[1]
-            self._E = (self.TILESIZE * j + 12, self.TILESIZE * i + 12)
+            image = self.tilesList[1]
+            self._E = (self.TILESIZE * j + 12, self.TILESIZE * i +12)
 
 
         if char == '0':
-            self._0 = (self.TILESIZE * j + 12, self.TILESIZE * i + 12)
+            self._0 = (self.TILESIZE*j+12,self.TILESIZE*i+12)
         elif char == '1':
             self._1 = (self.TILESIZE * j + 12, self.TILESIZE * i + 12)
         elif char == '2':
@@ -87,7 +92,7 @@ class Map:
         elif char == '9':
             self._9 = (self.TILESIZE * j + 12, self.TILESIZE * i + 12)
 
-        return tile
+        return image
 
     def getCharList(self):
         return self.charList
