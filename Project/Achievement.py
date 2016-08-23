@@ -1,14 +1,16 @@
 import pygame
 import os
+from Builder import *
 
 class Achiev:
     def __init__(self):
         self.achievement_file = os.path.join('Images', 'achievement.txt')
         listAch = self.readFile()
-        self.achiev1 = listAch[0]
-        self.achiev2 = listAch[1]
-        self.achiev3 = listAch[2]
-        self.achiev4 = listAch[3]
+        self.achiev1 = int(listAch[0])
+        self.achiev2 = int(listAch[1])
+        self.achiev3 = int(listAch[2])
+        self.achiev4 = int(listAch[3])
+        print self.achiev3
 
     def readFile(self):
         file = open(self.achievement_file, 'r')
