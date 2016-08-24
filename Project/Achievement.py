@@ -10,6 +10,7 @@ class Achiev:
         self.achiev2 = int(listAch[1])
         self.achiev3 = int(listAch[2])
         self.achiev4 = int(listAch[3])
+        self.achiev5 = listAch[4]
         print self.achiev3
 
     def readFile(self):
