@@ -21,3 +21,11 @@ class Achiev:
             listAchiev.append(self.linesAchiev[i])
         return listAchiev
 
+    def writeFile(self, achiev, index):
+        achiev_file = os.path.join('Images', 'achievement.txt')
+        lines = open(achiev_file, 'r').readlines()
+        lines[index] = str(achiev)
+        out = open(achiev_file, 'w')
+        out.writelines(lines)
+        out.close()
+

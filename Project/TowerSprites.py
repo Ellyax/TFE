@@ -159,14 +159,14 @@ class TowerSprite(pygame.sprite.Sprite):
             self.speed = 'average'
 
         if self.type == 2:
-            self.image = self.tilesList[1]
+            self.image = self.tilesList[2]
             self.BASED_DMG = 15
             self.cost = 60
             self.range = 100
             self.speed = 'average'
 
         if self.type == 3:
-            self.image = self.tilesList[2]
+            self.image = self.tilesList[1]
             self.BASED_DMG = 5
             self.cost = 75
             self.range = 300

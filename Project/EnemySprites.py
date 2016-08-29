@@ -46,6 +46,7 @@ class EasyEnemy(pygame.sprite.Sprite):
             self.kill()
             enemyList.remove(self)
             player.enemy_count -= 1
+            player.enemy_killed += 1
         self.animate()
         self.move()
 
@@ -103,7 +104,8 @@ class EasyEnemy(pygame.sprite.Sprite):
         if self.pause >= self.delay:
             self.pause = 0
             self.frame += 1
-            if self.frame >= len(self.imgList):
+            #if self.frame >= len(self.imgList):
+            if self.frame >= 3:
                 self.frame = 0
             self.image = self.imgList[self.frame]
 
@@ -154,6 +156,7 @@ class BossEnemy(pygame.sprite.Sprite):
             self.kill()
             enemyList.remove(self)
             player.enemy_count -= 1
+            player.enemy_killed += 1
         self.animate()
         self.move()
 

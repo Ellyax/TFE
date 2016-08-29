@@ -13,6 +13,7 @@ class Player():
         self.score = 0
         self.wave = 0
         self.enemy_count = 0
+        self.enemy_killed = 0
 
 class MapChoice(pygame.sprite.Sprite):
     def __init__(self, x, y, type):
@@ -145,9 +146,7 @@ twrSurf.set_alpha(255*0.4)
 twrSurf.fill((255,0,255))
 twrSurf.set_colorkey((255,0,255))
 
-drkSurf = pygame.Surface((625,625))
-drkSurf.set_alpha(255*0.6)
-drkSurf.fill((20,20,20))
+
 
 
 
