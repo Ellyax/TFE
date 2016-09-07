@@ -143,6 +143,7 @@ class Tower(pygame.sprite.Sprite):
 
             return
 
+
 class TowerSprite(pygame.sprite.Sprite):
     def __init__(self, x, y, type):
         pygame.sprite.Sprite.__init__(self)

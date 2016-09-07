@@ -24,7 +24,7 @@ class Achiev:
     def writeFile(self, achiev, index):
         achiev_file = os.path.join('Images', 'achievement.txt')
         lines = open(achiev_file, 'r').readlines()
-        lines[index] = str(achiev)
+        lines[index] = str(achiev) + '\n'
         out = open(achiev_file, 'w')
         out.writelines(lines)
         out.close()
